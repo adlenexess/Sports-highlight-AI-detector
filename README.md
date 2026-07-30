@@ -181,45 +181,6 @@ Foreign keys use `ON DELETE CASCADE` (or `SET NULL` for `Processing_Runs.match_i
 
 ---
 
-## API
-
-The integration gateway exposes:
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | SportsLab UI (injects `wire.js`) |
-| `/api/generate` | POST | Upload video and generate highlights |
-| `/api/outputs/<filename>` | GET | Download generated highlight video |
-
-**POST `/api/generate`** form fields:
-
-| Field | Description |
-|-------|-------------|
-| `sport` | `cricket`, `football`, `basketball`, `tennis`, or `generic` |
-| `source_mode` | `file` or `url` |
-| `video` | File upload (when `source_mode=file`) |
-| `video_url` | Video URL (when `source_mode=url`) |
-
-**Success response (JSON):**
-
-```json
-{
-  "success": true,
-  "output_url": "/api/outputs/highlight_abc12345.mp4",
-  "sport": "cricket",
-  "duration": 3600.0,
-  "num_highlights": 6,
-  "processing_seconds": 42.3,
-  "windows": [
-    { "start": 120.5, "end": 135.0, "score": 0.82 }
-  ]
-}
-```
-
-Max upload size: **500 MB**. Allowed formats: `mp4`, `mov`, `avi`, `mkv`.
-
----
-
 ## Configuration
 
 | Setting | Location | Default |
