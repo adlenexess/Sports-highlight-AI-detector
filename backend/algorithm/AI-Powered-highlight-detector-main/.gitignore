@@ -1,0 +1,15 @@
+
+
+uploads/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+static/uploads/*
+static/outputs/*
+!static/uploads/.gitkeep
+!static/outputs/.gitkeep
+
+cookies.txt
+*.env

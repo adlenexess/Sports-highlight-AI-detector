@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# Environment and secrets
+*.env
+.env.*
+cookies.txt
+
+# Generated media and uploads
+backend/algorithm/AI-Powered-highlight-detector-main/static/uploads/**
+backend/algorithm/AI-Powered-highlight-detector-main/static/outputs/**
+!backend/algorithm/AI-Powered-highlight-detector-main/static/uploads/.gitkeep
+!backend/algorithm/AI-Powered-highlight-detector-main/static/outputs/.gitkeep
+
+# Local database and temp files
+databaseSportslab/sports_highlight.db
+databaseSportslab/*TEMP*.mp3
+*.db-journal
+
+# OS
+.DS_Store
+Thumbs.db

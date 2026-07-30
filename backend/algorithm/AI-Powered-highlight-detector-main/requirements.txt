@@ -1,0 +1,11 @@
+Flask==3.0.3
+Werkzeug==3.0.3
+opencv-python==4.10.0.84
+moviepy==1.0.3
+librosa==0.10.2.post1
+soundfile==0.12.1
+scenedetect==0.6.4
+numpy==1.26.4
+mysql-connector-python==9.0.0
+requests==2.32.3
+yt-dlp==2024.8.6

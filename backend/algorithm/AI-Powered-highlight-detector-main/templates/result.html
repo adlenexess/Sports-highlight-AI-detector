@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Your Highlights &mdash; HighlightAI{% endblock %}
+{% block content %}
+<section class="result">
+    <h1>Your Highlight Reel is Ready 🎬</h1>
+    <p>Sport: <strong>{{ sport|capitalize }}</strong> &middot;
+       Original duration: <strong>{{ "%.1f"|format(original_duration) }}s</strong> &middot;
+       Processed in <strong>{{ "%.1f"|format(processing_seconds) }}s</strong></p>
+
+    <video controls width="720" src="{{ url_for('serve_output', filename=output_video) }}"></video>
+
+    <p>
+        <a class="btn" href="{{ url_for('serve_output', filename=output_video) }}" download>Download highlight.mp4</a>
+        <a class="btn secondary" href="{{ url_for('index') }}">Process Another Video</a>
+    </p>
+
+    <h2>Detected Highlight Moments ({{ windows|length }})</h2>
+    <table>
+        <thead>
+            <tr><th>#</th><th>Start</th><th>End</th><th>Duration</th></tr>
+        </thead>
+        <tbody>
+            {% for start, end, score in windows %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ "%.1f"|format(start) }}s</td>
+                <td>{{ "%.1f"|format(end) }}s</td>
+                <td>{{ "%.1f"|format(end - start) }}s</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

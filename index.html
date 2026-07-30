@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SportsLab — AI Sports Highlight Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bellefair&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app" class="sport-cricket">
+    <!-- Landing Page -->
+    <section id="view-landing" class="view view-active" aria-label="Landing page" aria-hidden="false">
+      <div class="scale-wrap">
+        <div class="landing-stage">
+          <div class="landing-bg" aria-hidden="true">
+            <div class="landing-bg__base"></div>
+            <div class="landing-bg__white-wedge"></div>
+            <div class="landing-bg__accent-wrap"><div class="landing-bg__accent"></div></div>
+            <div class="landing-bg__primary-wrap"><div class="landing-bg__primary"></div></div>
+          </div>
+
+          <img src="assets/logo.png" alt="" class="landing-logo-img" width="234" height="350">
+          <h1 class="landing-brand font-bangers">SportsLab</h1>
+
+          <h2 class="landing-title font-bangers">
+            AI-Based Sports Highlight Generation System
+          </h2>
+          <p class="landing-desc font-bellefair">
+            Transform full-length sports matches into exciting highlight reels using Artificial Intelligence, Audio Analysis, and Computer Vision.
+          </p>
+
+          <p class="sport-picker__label font-bellefair">Choose your Sports</p>
+          <div class="sport-picker__icons">
+            <button type="button" class="sport-icon sport-icon--cricket active" data-sport="cricket" aria-label="Select Cricket" aria-pressed="true">
+              <img src="assets/cricket-ball.png" alt="Cricket" width="250" height="111">
+            </button>
+            <button type="button" class="sport-icon sport-icon--football" data-sport="football" aria-label="Select Football" aria-pressed="false">
+              <img src="assets/football.png" alt="Football" width="166" height="111">
+            </button>
+          </div>
+
+          <span class="hero-label font-bangers" id="hero-sport-label">CRICKET</span>
+
+          <div class="hero-ball-wrap" aria-hidden="true">
+            <img src="assets/cricket-ball.png" alt="" class="hero-ball hero-ball--cricket active" width="1299" height="939">
+            <img src="assets/football.png" alt="" class="hero-ball hero-ball--football" width="1298" height="939">
+          </div>
+
+          <button type="button" id="btn-get-started" class="btn-cta font-bellefair">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upload Page -->
+    <section id="view-upload" class="view" aria-label="Upload page" aria-hidden="true">
+      <div class="scale-wrap">
+        <div class="page-canvas">
+          <div class="page-bg" aria-hidden="true">
+            <div class="page-bg__base"></div>
+            <div class="page-bg__glow page-bg__glow--left"></div>
+            <div class="page-bg__glow page-bg__glow--right"></div>
+          </div>
+
+          <a href="#" class="page-logo-link" id="logo-home" aria-label="Back to home">
+            <img src="assets/logo.png" alt="" class="page-logo-img" width="234" height="350">
+            <h1 class="page-brand font-bangers">SportsLab</h1>
+          </a>
+
+          <div class="upload-bar">
+            <input
+              type="text"
+              id="video-url"
+              class="upload-input font-bellefair"
+              placeholder="Upload video or paste URL"
+              aria-label="Video URL"
+            >
+            <label class="btn-upload-small font-bellefair" for="file-input">
+              Upload
+              <input type="file" id="file-input" accept="video/*" hidden>
+            </label>
+          </div>
+
+          <button type="button" id="btn-generate" class="btn-generate font-bellefair">
+            Generate
+          </button>
+
+          <p class="upload-description font-bellefair" id="upload-description">
+            Analyze your cricket match with the power of Artificial Intelligence. Upload a cricket match video, and our AI-based analyzer automatically detects key match events by examining player actions, crowd reactions, commentary intensity, scene transitions, and audio spikes. The system identifies exciting moments such as boundaries, sixes, wickets, catches, run-outs, and match-winning plays, then combines them into a concise highlight reel.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result Page -->
+    <section id="view-result" class="view" aria-label="Result page" aria-hidden="true">
+      <div class="scale-wrap">
+        <div class="page-canvas page-canvas--result">
+          <div class="page-bg" aria-hidden="true">
+            <div class="page-bg__base"></div>
+            <div class="page-bg__glow page-bg__glow--left"></div>
+            <div class="page-bg__glow page-bg__glow--right"></div>
+          </div>
+
+          <a href="#" class="page-logo-link" id="logo-home-result" aria-label="Back to home">
+            <img src="assets/logo.png" alt="" class="page-logo-img" width="234" height="350">
+            <h1 class="page-brand font-bangers">SportsLab</h1>
+          </a>
+
+          <div class="upload-bar upload-bar--compact">
+            <input
+              type="text"
+              id="video-url-result"
+              class="upload-input font-bellefair"
+              placeholder="Upload video or paste URL"
+              aria-label="Video URL"
+              readonly
+            >
+            <label class="btn-upload-small font-bellefair" for="file-input-result">
+              Upload
+              <input type="file" id="file-input-result" accept="video/*" hidden>
+            </label>
+          </div>
+
+          <div class="result-card" id="result-card">
+            <h2 class="result-title font-bellefair">Result</h2>
+            <div class="result-preview" id="result-preview">
+              <video id="result-video" class="result-video" controls hidden></video>
+              <div class="result-placeholder" id="result-placeholder">
+                <img src="assets/cricket-ball.png" alt="" class="result-placeholder-icon" id="result-placeholder-icon" width="120" height="80">
+                <p class="result-placeholder-text font-bellefair">Your highlight reel is ready!</p>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" id="btn-download" class="btn-download font-bellefair">
+            Download
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div id="loading-overlay" class="loading-overlay" hidden aria-live="polite" aria-busy="true">
+      <div class="loading-spinner"></div>
+      <p class="loading-text font-bellefair">Analyzing match footage…</p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

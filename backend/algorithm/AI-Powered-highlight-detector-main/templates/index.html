@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Upload Video &mdash; HighlightAI{% endblock %}
+{% block content %}
+<section class="hero">
+    <h1>Automatic Sports Highlight Generator</h1>
+    <p>Upload a full match video. Our pipeline fuses motion, crowd-audio,
+       scene-cut, and replay-detection signals to automatically extract
+       the most exciting moments &mdash; no manual editing required.</p>
+</section>
+
+<section class="upload-card">
+    <div class="source-toggle">
+        <button type="button" class="toggle-btn active" id="tab-file">Upload File</button>
+        <button type="button" class="toggle-btn" id="tab-url">Paste Video URL</button>
+    </div>
+
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" id="upload-form">
+        <input type="hidden" name="source_mode" id="source_mode" value="file">
+
+        <div id="file-input-group">
+            <label for="video">Match video (mp4, mov, avi, mkv)</label>
+            <input type="file" name="video" id="video" accept=".mp4,.mov,.avi,.mkv">
+        </div>
+
+        <div id="url-input-group" class="hidden">
+            <label for="video_url">Video URL</label>
+            <input type="url" name="video_url" id="video_url"
+                   placeholder="https://... (direct video link, YouTube, etc.)">
+            <p class="hint">Works with direct video file links and hosted
+               platforms like YouTube. Large videos may take a while to download.</p>
+        </div>
+
+        <label for="sport">Sport</label>
+        <select name="sport" id="sport">
+            <option value="generic">Generic / Other</option>
+            <option value="football">Football (Soccer)</option>
+            <option value="cricket">Cricket</option>
+            <option value="basketball">Basketball</option>
+            <option value="tennis">Tennis</option>
+        </select>
+
+        <button type="submit" id="submit-btn">Generate Highlights</button>
+        <p id="processing-note" class="hidden">
+            Processing your video &mdash; this can take a few minutes for
+            longer matches. Please don't close this tab.
+        </p>
+    </form>
+</section>
+
+<section class="how-it-works">
+    <h2>How it works</h2>
+    <ol>
+        <li><strong>Motion detection</strong> &mdash; measures frame-to-frame movement to spot fast action.</li>
+        <li><strong>Audio analysis</strong> &mdash; detects crowd roars and commentary spikes.</li>
+        <li><strong>Scene-cut detection</strong> &mdash; broadcast camera cuts cluster around big moments.</li>
+        <li><strong>Replay detection</strong> &mdash; flags broadcaster slow-motion replays as bonus evidence.</li>
+        <li><strong>Fusion &amp; ranking</strong> &mdash; all four signals are combined into one excitement score, and the top moments are stitched into <code>highlight.mp4</code>.</li>
+    </ol>
+</section>
+
+<script>
+    const tabFile = document.getElementById('tab-file');
+    const tabUrl = document.getElementById('tab-url');
+    const fileGroup = document.getElementById('file-input-group');
+    const urlGroup = document.getElementById('url-input-group');
+    const sourceMode = document.getElementById('source_mode');
+    const videoInput = document.getElementById('video');
+    const videoUrlInput = document.getElementById('video_url');
+
+    function activateTab(mode) {
+        sourceMode.value = mode;
+        const isFile = mode === 'file';
+        tabFile.classList.toggle('active', isFile);
+        tabUrl.classList.toggle('active', !isFile);
+        fileGroup.classList.toggle('hidden', !isFile);
+        urlGroup.classList.toggle('hidden', isFile);
+        videoInput.required = isFile;
+        videoUrlInput.required = !isFile;
+    }
+
+    tabFile.addEventListener('click', () => activateTab('file'));
+    tabUrl.addEventListener('click', () => activateTab('url'));
+    activateTab('file');
+
+    document.getElementById('upload-form').addEventListener('submit', function () {
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('processing-note').classList.remove('hidden');
+    });
+</script>
+{% endblock %}

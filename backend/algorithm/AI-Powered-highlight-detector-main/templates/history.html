@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}History &mdash; HighlightAI{% endblock %}
+{% block content %}
+<section class="result">
+    <h1>Processing History</h1>
+    <p>Logged from MySQL (<code>processed_videos</code> table).</p>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th><th>Filename</th><th>Sport</th><th>Duration</th>
+                <th>Highlights</th><th>Processing Time</th><th>When</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.original_filename }}</td>
+                <td>{{ row.sport }}</td>
+                <td>{{ "%.1f"|format(row.duration_seconds or 0) }}s</td>
+                <td>{{ row.num_highlights }}</td>
+                <td>{{ "%.1f"|format(row.processing_seconds or 0) }}s</td>
+                <td>{{ row.created_at }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7">No runs logged yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
